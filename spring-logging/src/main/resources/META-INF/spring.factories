@@ -1,0 +1,1 @@
+org.springframework.beans.factory.config.BeanPostProcessor=rs.ursus.commons.spring.logging.processors.LoggerBeanPostProcessor
