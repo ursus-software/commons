@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>rs.ursus</groupId>
     <artifactId>commons</artifactId>
-    <version>0.0.1.SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>Common Libraries</description>
     <developers>
