@@ -15,7 +15,8 @@ deploy:
   provider: script
   script: ".travis/scripts/release.sh"
   on:
-    branch: "/^release[/].+$/"
+    all_branches: true
+    condition: "$TRAVIS_BRANCH =~ ^release[/].+$"
 addons:
   code_climate:
     repo_token: 4e2736756789ad38e0ad639ffbc984b4a3a3939e9ee204c83bdfd53dfe59dd09

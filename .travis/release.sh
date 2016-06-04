@@ -7,9 +7,13 @@ GITHUB_TOKEN="${GITHUB_TOKEN:-""}"
 COMMIT_AUTHOR_EMAIL="${COMMIT_AUTHOR_EMAIL:-"$(git config user.email)"}"
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+    echo "Running maven release"
     mvn release:prepare && mvn release:perform
-    if [ "$?" -ne "0" ]; then
+    if [ "$?" -eq "0" ]; then
         if [ "${TRAVIS}" ==  "true" ]; then
+            echo "Detected TravisCI environment."
+            git config user.name "Travis CI"
+            git config user.email "${COMMIT_AUTHOR_EMAIL}"
             git remote rm origin
             if [ "${GITHUB_TOKEN}" != "" ]; then
                 if [ "${GITHUB_USER}" != "" ]; then
@@ -20,14 +24,12 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
             fi
         fi
         if [[ $- == *i* ]]; then
-            read -p "Are you sure? " -n 1 -r
-            echo    # (optional) move to a new line
+            read -p "Are you sure you want to push changes to origin? " -n 1 -r
+#            echo    # (optional) move to a new line
             if [[ ! $REPLY =~ ^[Yy]$ ]]; then
                 exit 0
             fi
         fi
-        git config user.name "Travis CI"
-        git config user.email "$COMMIT_AUTHOR_EMAIL"
         git push origin
     fi
 fi
