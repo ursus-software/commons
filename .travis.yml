@@ -14,7 +14,7 @@ env:
 deploy:
   skip_cleanup: true
   provider: script
-  script: ".travis/scripts/release.sh"
+  script: "./.travis/scripts/release.sh"
   on:
     all_branches: true
     condition: "$TRAVIS_BRANCH =~ ^release[/].+$"
